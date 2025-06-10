@@ -6,13 +6,16 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 export default function GameList() {
   const [games, setGames] = useState<VideoGame[]>([]);
+  const [total, setTotal] = useState(0);
   const [error,setError] = useState<string|null>(null);
 
   useEffect(() => {
     const loadGames = async () => {
         try {
-          const data = await VideoGamesApi.getAll();
-          setGames(data);
+          const data = await VideoGamesApi.getAllPaged(1,10); //TODO - PageNumber, PageSize
+          debugger;
+          setGames(data.items);
+          setTotal(data.totalNumber);
           setError(null);
         } catch (err: any) {
           setError(err.message || 'API Error');
@@ -25,6 +28,7 @@ export default function GameList() {
   return (
     <div className="container">
       <h2>Video Game Catalogue</h2>
+      <h3>Total: {total}</h3>
       <ListGroup>
         {games.map((game: any) => (
           <ListGroup.Item key={game.id}>
