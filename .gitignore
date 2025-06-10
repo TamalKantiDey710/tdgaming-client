@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Test coverage
+coverage/
+
+# Production logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE/editor-specific
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Jest
+jest.config.js
+jest.cache/
+coverage/
+
+# Parcel/CRA
+.cache/
+.parcel-cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# React snapshot tests
+*.snap
+
+# Storybook
+out/
+.storybook-out/
+storybook-static/
+
+# ESLint/Prettier cache
+.eslintcache
+
+# Git conflicts
+*.orig
+
