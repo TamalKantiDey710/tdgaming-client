@@ -60,6 +60,10 @@ export default function EditGame() {
     setGame({ ...game, [e.target.name]: e.target.value });
   };
 
+  //  const handleBackClick = () => {
+  //   navigate('/'); 
+  // };
+
   const onSubmit = async (data: VideoGame) => {
     try {
       if (id) {
@@ -72,6 +76,20 @@ export default function EditGame() {
       alert(err.message || 'Failed to save game');
     }
   };
+
+  const handleDelete = async () => {
+  if (!id) return;
+
+  const confirm = window.confirm('Are you sure you want to delete?');
+  if (!confirm) return;
+
+  try {
+    await VideoGamesApi.delete(id);
+    navigate('/');
+  } catch (err: any) {debugger;
+    alert(err.message || 'Failed to delete');
+  }
+};
 
   return (
     <div className="container">
@@ -89,7 +107,21 @@ export default function EditGame() {
             className="form-control"/>
         {errors.price && <p style={{ color: 'red' }}>{errors.price.message}</p>}
         </div>
-        <button className="btn btn-primary">{id ? 'Update' : 'Create'}</button>
+        <div className="d-flex">
+          <button className="btn btn-primary">{id ? 'Update' : 'Create'}</button>
+
+          {id && (
+            <button type="button" onClick={handleDelete} className="btn btn-danger ms-2">
+              Delete
+            </button>
+          )}
+
+          <button className="btn btn-secondary me-2" onClick={() => navigate('-1')}>
+            Back to List
+          </button>
+
+        </div>
+
       </form>
     </div>
   );

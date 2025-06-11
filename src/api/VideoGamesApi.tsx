@@ -41,5 +41,12 @@ export const VideoGamesApi = {
           body: JSON.stringify(game),
         });
         if (!response.ok) throw new Error('Failed to update game');
+    },
+    async delete(id: string): Promise<void> {
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) throw new Error('Failed to delete');
     }
 };
