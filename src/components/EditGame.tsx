@@ -56,9 +56,9 @@ export default function EditGame() {
 
   }, [id,reset]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setGame({ ...game, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setGame({ ...game, [e.target.name]: e.target.value });
+  // };
 
    const handleBackClick = () => {
     navigate('/'); 
