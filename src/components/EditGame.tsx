@@ -22,7 +22,7 @@ const defaultGame: VideoGame = {
 
 export default function EditGame() {
   const { id } = useParams();
-  const [game, setGame] = useState<VideoGame>(defaultGame);
+  //const [game, setGame] = useState<VideoGame>(defaultGame);
   const [error,setError] = useState<string|null>(null);
 
   const navigate = useNavigate();
