@@ -6,10 +6,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-const defaultGame: VideoGame = {
-    title: '',
-    price: 0,
-  };
+// const defaultGame: VideoGame = {
+//     title: '',
+//     price: 0,
+//   };
 
   const schema = yup.object().shape({
     title: yup.string().required('Required'),
