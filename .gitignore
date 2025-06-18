@@ -57,3 +57,5 @@ storybook-static/
 # Git conflicts
 *.orig
 
+package-lock.json
+
