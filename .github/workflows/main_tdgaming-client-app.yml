@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - tdgaming-client-app
+name: Build and deploy React app to Azure Web App
 
 on:
   push:
@@ -11,27 +8,23 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
-    permissions:
-      contents: read #This is required for actions/checkout
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js version
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '~20'
+          node-version: '20'
 
-      - name: npm install, build, and test
+      - name: Install dependencies and build
+        working-directory: tdgaming-client
         run: |
           npm install
-          npm run build --if-present
+          npm run build
 
-      - name: List build directory contents
-        run: dir tdgaming-client/build
-            
-      - name: Upload artifact for deployment job
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: react-app
@@ -40,29 +33,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    
-    permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
 
     steps:
-      - name: Download artifact from build job
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: react-app
-      
-      - name: Login to Azure
+
+      - name: Azure Login
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8203D06F92334E5584ABCD24A57D2335 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6FB2A583615440019FB5A5F084735192 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_46D66E9EAD9649E1BEB569BC67AF61EB }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
-        id: deploy-to-webapp
         with:
           app-name: 'tdgaming-client-app'
           slot-name: 'Production'
           package: .
-          
