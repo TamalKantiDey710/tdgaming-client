@@ -13,7 +13,6 @@ export default function GameList() {
     const loadGames = async () => {
         try {
           const data = await VideoGamesApi.getAllPaged(1,10); //TODO - PageNumber, PageSize
-          debugger;
           setGames(data.items);
           setTotal(data.totalNumber);
           setError(null);

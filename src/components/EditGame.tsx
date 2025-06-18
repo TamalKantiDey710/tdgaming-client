@@ -60,9 +60,9 @@ export default function EditGame() {
     setGame({ ...game, [e.target.name]: e.target.value });
   };
 
-  //  const handleBackClick = () => {
-  //   navigate('/'); 
-  // };
+   const handleBackClick = () => {
+    navigate('/'); 
+  };
 
   const onSubmit = async (data: VideoGame) => {
     try {
@@ -116,7 +116,7 @@ export default function EditGame() {
             </button>
           )}
 
-          <button className="btn btn-secondary me-2" onClick={() => navigate('-1')}>
+          <button className="btn btn-secondary me-2" onClick={handleBackClick}>
             Back to List
           </button>
 
