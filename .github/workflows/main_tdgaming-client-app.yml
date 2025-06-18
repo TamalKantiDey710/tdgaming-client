@@ -19,7 +19,6 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies and build
-        working-directory: tdgaming-client
         run: |
           npm install
           npm run build
